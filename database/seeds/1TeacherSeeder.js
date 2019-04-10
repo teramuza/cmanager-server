@@ -19,10 +19,12 @@ class TeacherSeeder {
 
   	const dump1 = new Teacher()
   	dump1.name = "Arimbi"
+    dump1.salary = 1500000
   	await dump1.save()
 
   	const dump2 = new Teacher()
   	dump2.name = "Sumire"
+    dump2.salary = 1500000
   	await dump2.save()
 
   	// const dump3 = new Teacher()

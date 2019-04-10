@@ -7,8 +7,10 @@ class PayrollSchema extends Schema {
   up () {
     this.create('payrolls', (table) => {
       table.increments()
+      table.integer('teacher_id').unsigned().references('id').inTable('teachers')
       table.integer('courses_class_id').unsigned().references('id').inTable('courses_classes')
-      table.bigInteger('total')
+      table.integer('students_count').notNullable()
+      table.bigInteger('total').notNullable()
       table.date('date')
       table.timestamps()
     })
