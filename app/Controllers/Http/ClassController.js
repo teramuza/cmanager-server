@@ -3,6 +3,8 @@
 /** @typedef {import('@adonisjs/framework/src/Request')} Request */
 /** @typedef {import('@adonisjs/framework/src/Response')} Response */
 /** @typedef {import('@adonisjs/framework/src/View')} View */
+const Class = use('App/Models/Class')
+const ClassType = use('App/Models/ClassType')
 
 /**
  * Resourceful controller for interacting with classes
@@ -18,6 +20,12 @@ class ClassController {
    * @param {View} ctx.view
    */
   async index ({ request, response, view }) {
+    let classes = await ClassType
+    .query()
+    .with('classes')
+    .fetch()
+
+    return classes
   }
 
   /**

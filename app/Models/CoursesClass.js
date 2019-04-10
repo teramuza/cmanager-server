@@ -5,7 +5,7 @@ const Model = use('Model')
 
 class CoursesClass extends Model {
 	coursesClassStudents(){
-		return this.hasMany('App/Models/CoursesClassStudents')
+		return this.hasMany('App/Models/CoursesClassStudent')
 	}
 
 	payroll(){

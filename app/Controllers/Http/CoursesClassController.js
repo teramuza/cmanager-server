@@ -3,7 +3,7 @@
 /** @typedef {import('@adonisjs/framework/src/Request')} Request */
 /** @typedef {import('@adonisjs/framework/src/Response')} Response */
 /** @typedef {import('@adonisjs/framework/src/View')} View */
-
+const Courses = use('App/Models/CoursesClass')
 /**
  * Resourceful controller for interacting with coursesclasses
  */
@@ -18,6 +18,12 @@ class CoursesClassController {
    * @param {View} ctx.view
    */
   async index ({ request, response, view }) {
+    let classes = await Courses
+    .query()
+    .withCount('coursesClassStudents as students')
+    .fetch()
+
+    return classes
   }
 
   /**
@@ -53,6 +59,14 @@ class CoursesClassController {
    * @param {View} ctx.view
    */
   async show ({ params, request, response, view }) {
+    const { id } = params 
+    let courses = await Courses
+    .query()
+    .where('id',id)
+    .with('coursesClassStudents')
+    .fetch()
+
+    return courses
   }
 
   /**

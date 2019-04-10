@@ -4,6 +4,8 @@
 /** @typedef {import('@adonisjs/framework/src/Response')} Response */
 /** @typedef {import('@adonisjs/framework/src/View')} View */
 
+const Teacher = use('App/Models/Teacher')
+const Courses = use('App/Models/CoursesClass')
 /**
  * Resourceful controller for interacting with teachers
  */
@@ -18,6 +20,14 @@ class TeacherController {
    * @param {View} ctx.view
    */
   async index ({ request, response, view }) {
+    let teachers = await Teacher
+    .query()
+    .with('coursesClasses')
+    .fetch()
+
+    return teachers
+
+
   }
 
   /**

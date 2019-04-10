@@ -5,7 +5,7 @@ const Model = use('Model')
 
 class Teacher extends Model {
 	coursesClasses(){
-		return this.hasMany('App/Models/CoursesClasses')
+		return this.hasMany('App/Models/CoursesClass').withCount('coursesClassStudents as students')
 	}
 }
 

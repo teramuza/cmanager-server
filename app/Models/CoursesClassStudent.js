@@ -5,19 +5,19 @@ const Model = use('Model')
 
 class CoursesClassStudent extends Model {
 	coursesClasses(){
-		return this.belongsTo('App/Models/CoursesClasses')
+		return this.belongsTo('App/Models/CoursesClass')
 	}
 
 	students(){
-		return this.belongsTo('App/Models/Students')
+		return this.belongsTo('App/Models/Student')
 	}
 
 	attendances(){
-		return this.hasOne('App/Models/Students')
+		return this.hasOne('App/Models/Attendance')
 	}
 
 	payments(){
-		return this.hasOne('App/Models/Payments')
+		return this.hasOne('App/Models/Payment')
 	}
 }
 

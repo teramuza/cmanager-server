@@ -8,6 +8,7 @@ class TeachersSchema extends Schema {
     this.create('teachers', (table) => {
       table.increments()
       table.string('name').notNullable()
+      table.bigInteger('salary').notNullable()
       table.timestamps()
     })
   }

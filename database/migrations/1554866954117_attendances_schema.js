@@ -7,7 +7,7 @@ class AttendancesSchema extends Schema {
   up () {
     this.create('attendances', (table) => {
       table.increments()
-      table.integer('student').unsigned().references('id').inTable('courses_class_students')
+      table.integer('courses_class_student_id').unsigned().references('id').inTable('courses_class_students')
       table.date('date').notNullable()
       table.string('status').notNullable()
       table.timestamps()
