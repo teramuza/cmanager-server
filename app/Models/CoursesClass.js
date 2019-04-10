@@ -11,6 +11,10 @@ class CoursesClass extends Model {
 	payroll(){
 		return this.hasOne('App/Models/Payroll')
 	}
+
+	teacher(){
+		return this.belongsTo('App/Models/Teacher')
+	}
 }
 
 module.exports = CoursesClass

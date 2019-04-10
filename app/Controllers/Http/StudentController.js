@@ -20,6 +20,7 @@ class StudentController {
   async index ({ request, response, view }) {
     let students = Student
     .query()
+    .with('coursesClassStudents')
     .fetch()
 
     return students

@@ -28,17 +28,17 @@ class CourseClassSeeder {
 
   	const class1 = new CoursesStudent()
   	class1.courses_class_id = 1
-  	class1.students_id = 1
+  	class1.student_id = 1
   	await class1.save()
 
   	const class2 = new CoursesStudent()
   	class2.courses_class_id = 2
-  	class2.students_id = 2
+  	class2.student_id = 2
   	await class2.save()
 
   	const class3 = new CoursesStudent()
   	class3.courses_class_id = 2
-  	class3.students_id = 3
+  	class3.student_id = 3
   	await class3.save()
 
   }
