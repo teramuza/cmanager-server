@@ -4,6 +4,9 @@
 const Model = use('Model')
 
 class Payroll extends Model {
+	coursesClasses(){
+		return this.belongsTo('App/Models/CoursesClasses')
+	}
 }
 
 module.exports = Payroll

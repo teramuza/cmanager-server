@@ -4,6 +4,9 @@
 const Model = use('Model')
 
 class Class extends Model {
+	classTypes(){
+		return this.hasMany('App/Models/ClassTypes')
+	}
 }
 
 module.exports = Class
