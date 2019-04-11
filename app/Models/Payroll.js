@@ -5,7 +5,10 @@ const Model = use('Model')
 
 class Payroll extends Model {
 	coursesClasses(){
-		return this.belongsTo('App/Models/CoursesClasses')
+		return this.belongsTo('App/Models/CoursesClass')
+	}
+	teacher(){
+		return this.belongsTo('App/Models/Teacher')
 	}
 }
 

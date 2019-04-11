@@ -5,7 +5,7 @@ const Model = use('Model')
 
 class CoursesClassStudent extends Model {
 	coursesClasses(){
-		return this.belongsTo('App/Models/CoursesClass').with('teacher')
+		return this.belongsTo('App/Models/CoursesClass').with('teacher').with('classTypes')
 	}
 
 	students(){

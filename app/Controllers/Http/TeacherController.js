@@ -51,6 +51,12 @@ class TeacherController {
    * @param {Response} ctx.response
    */
   async store ({ request, response }) {
+    const { name, salary } = request.post()
+    const addTeacher = {name, salary}
+
+    await Teacher.create(addTeacher)
+    const output = {message: 'Teacher successfully added', status : 200}
+    return output
   }
 
   /**
@@ -63,6 +69,15 @@ class TeacherController {
    * @param {View} ctx.view
    */
   async show ({ params, request, response, view }) {
+    const {id} = params
+
+    let teachers = await Teacher
+    .query()
+    .where('id', id)
+    .with('coursesClasses')
+    .fetch()
+
+    return teachers
   }
 
   /**
@@ -86,6 +101,17 @@ class TeacherController {
    * @param {Response} ctx.response
    */
   async update ({ params, request, response }) {
+    const { id } = params
+    const { name, salary } = request.post()
+    const upTeacher = {name, salary}
+
+    await Teacher
+    .query()
+    .where('id', id)
+    .update(upTeacher)
+
+    const output = {message: 'Changes saved successfully', status: 200}
+    return output
   }
 
   /**
@@ -97,6 +123,15 @@ class TeacherController {
    * @param {Response} ctx.response
    */
   async destroy ({ params, request, response }) {
+    const { id } = params
+
+    await Teacher
+    .query()
+    .where('id', id)
+    .delete()
+
+    const output = {message : 'Teacher successfully removed', status: 200}
+    return output
   }
 }
 

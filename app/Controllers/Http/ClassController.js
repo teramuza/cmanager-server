@@ -19,7 +19,16 @@ class ClassController {
    * @param {Response} ctx.response
    * @param {View} ctx.view
    */
-  async index ({ request, response, view }) {
+  async index({ request, response, view }) {
+    let classes = await Class
+    .query()
+    .with('classTypes')
+    .fetch()
+
+    return classes
+  }
+
+  async indexTypes ({ request, response, view }) {
     let classes = await ClassType
     .query()
     .with('classes')
@@ -49,6 +58,20 @@ class ClassController {
    * @param {Response} ctx.response
    */
   async store ({ request, response }) {
+    const {name} = request.post()
+
+    await Class.create({name})
+    const output = {message: 'Class successfully added', status: 200}
+    return output
+  }
+
+  async storeType ({ request, response }) {
+    const {class_id, type, price} = request.post()
+    const addType = {class_id, type, price}
+
+    await ClassType.create(addType)
+    const output = {message: 'ClassType successfully added', status: 200}
+    return output
   }
 
   /**
@@ -61,6 +84,29 @@ class ClassController {
    * @param {View} ctx.view
    */
   async show ({ params, request, response, view }) {
+    const {id} = params
+
+    let classes = await Class
+    .query()
+    .where('id',id)
+    .with('classTypes')
+    .fetch()
+
+    return classes
+
+  }
+
+  async showType ({ params, request, response, view }) {
+    const {id} = params
+
+    let classes = await ClassType
+    .query()
+    .where('id',id)
+    .with('classes')
+    .fetch()
+
+    return classes
+
   }
 
   /**
@@ -84,6 +130,30 @@ class ClassController {
    * @param {Response} ctx.response
    */
   async update ({ params, request, response }) {
+    const {id} = params
+    const {name} = request.post()
+
+    await Class
+    .query()
+    .where('id',id)
+    .update({name})
+
+    const output = {message: 'Changes saved successfully', status: 200}
+    return output
+  }
+
+  async updateType ({ params, request, response }) {
+    const {id} = params
+    const {class_id, type, price} = request.post()
+    const upType = {class_id, type, price}
+
+    await ClassType
+    .query()
+    .where('id',id)
+    .update(upType)
+
+    const output = {message: 'Changes saved successfully', status: 200}
+    return output
   }
 
   /**
@@ -95,6 +165,27 @@ class ClassController {
    * @param {Response} ctx.response
    */
   async destroy ({ params, request, response }) {
+    const {id} = params
+
+    await Class
+    .query()
+    .where('id',id)
+    .delete()
+
+    const output = {message : 'Class successfully removed', status: 200}
+    return output
+  }
+
+  async destroyType ({ params, request, response }) {
+    const {id} = params
+
+    await ClassType
+    .query()
+    .where('id',id)
+    .delete()
+
+    const output = {message : 'ClassType successfully removed', status: 200}
+    return output
   }
 }
 

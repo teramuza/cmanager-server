@@ -47,6 +47,12 @@ class StudentController {
    * @param {Response} ctx.response
    */
   async store ({ request, response }) {
+    const { name, phone_number, email } = request.post()
+    const addStudent = { name, phone_number, email }
+
+    await Student.create(addStudent)
+    const output = {message: 'Student successfully added', status: 200}
+    return output
   }
 
   /**
@@ -59,6 +65,15 @@ class StudentController {
    * @param {View} ctx.view
    */
   async show ({ params, request, response, view }) {
+    const {id} = params
+
+    let students = Student
+    .query()
+    .where('id', id)
+    .with('coursesClassStudents')
+    .fetch()
+
+    return students
   }
 
   /**
@@ -82,6 +97,17 @@ class StudentController {
    * @param {Response} ctx.response
    */
   async update ({ params, request, response }) {
+    const {id} = params
+    const { name, phone_number, email } = request.post()
+    const upStudent = { name, phone_number, email }
+
+    await Student
+    .query()
+    .where('id', id)
+    .update(upStudent)
+
+    const output = {message: 'Changes saved successfully', status: 200}
+    return output
   }
 
   /**
@@ -93,6 +119,15 @@ class StudentController {
    * @param {Response} ctx.response
    */
   async destroy ({ params, request, response }) {
+    const {id} = params
+
+    await Student
+    .query()
+    .where('id', id)
+    .delete()
+
+    const output = {message : 'Student successfully removed', status: 200}
+    return output
   }
 }
 

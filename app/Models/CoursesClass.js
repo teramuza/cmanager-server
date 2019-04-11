@@ -8,6 +8,10 @@ class CoursesClass extends Model {
 		return this.hasMany('App/Models/CoursesClassStudent')
 	}
 
+	classTypes(){
+		return this.belongsTo('App/Models/ClassType')
+	}
+
 	payroll(){
 		return this.hasOne('App/Models/Payroll')
 	}

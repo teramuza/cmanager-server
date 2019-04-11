@@ -11,6 +11,7 @@ class PaymentsSchema extends Schema {
       table.integer('student_id').unsigned().references('id').inTable('students')
       table.integer('class_type_id').unsigned().references('id').inTable('class_types')
       table.integer('courses_class_student_id').unsigned().references('id').inTable('courses_class_students')
+      table.bigInteger('cost')
       table.date('date')
       table.timestamps()
     })

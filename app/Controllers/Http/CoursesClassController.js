@@ -21,6 +21,7 @@ class CoursesClassController {
     let classes = await Courses
     .query()
     .withCount('coursesClassStudents as students')
+    .with('teacher')
     .fetch()
 
     return classes
@@ -47,6 +48,11 @@ class CoursesClassController {
    * @param {Response} ctx.response
    */
   async store ({ request, response }) {
+    const { class_type_id, teacher_id } = request.post()
+
+    await Courses.create({class_type_id, teacher_id})
+    const output = {message: 'CourseClass successfully added', status: 200}
+    return output
   }
 
   /**
@@ -64,6 +70,7 @@ class CoursesClassController {
     .query()
     .where('id',id)
     .with('coursesClassStudents')
+    .with('teacher')
     .fetch()
 
     return courses
@@ -90,6 +97,16 @@ class CoursesClassController {
    * @param {Response} ctx.response
    */
   async update ({ params, request, response }) {
+    const {id} = params
+    const { class_type_id, teacher_id } = request.post()
+
+    await Courses
+    .query()
+    .where('id',id)
+    .update({class_type_id, teacher_id})
+
+    const output = {message: 'Changes saved successfully', status: 200}
+    return output
   }
 
   /**
@@ -101,6 +118,12 @@ class CoursesClassController {
    * @param {Response} ctx.response
    */
   async destroy ({ params, request, response }) {
+    const {id} = params
+
+    await Courses
+    .query()
+    .where('id',id)
+    .delete()
   }
 }
 
