@@ -22,6 +22,7 @@ class CoursesClassController {
     .query()
     .withCount('coursesClassStudents as students')
     .with('teacher')
+    .with('classTypes')
     .fetch()
 
     return classes
